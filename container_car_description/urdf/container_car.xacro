@@ -1,0 +1,138 @@
+<?xml version="1.0" ?>
+<robot name="container_car" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find container_car_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find container_car_description)/urdf/container_car.trans" />
+<xacro:include filename="$(find container_car_description)/urdf/container_car.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin xyz="0.05908155549740775 -4.029122666512787e-10 0.04004034121485782" rpy="0 0 0"/>
+    <mass value="3.868389315645549"/>
+    <inertia ixx="0.006846" iyy="0.034945" izz="0.036193" ixy="0.0" iyz="0.0" ixz="-0.003702"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://container_car_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://container_car_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="container_1">
+  <inertial>
+    <origin xyz="5.305650809107193e-05 0.0 0.04000000000000001" rpy="0 0 0"/>
+    <mass value="12.298987499999999"/>
+    <inertia ixx="0.016438" iyy="0.047674" izz="0.050928" ixy="0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.02 -0.0 -0.03" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://container_car_description/meshes/container_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.02 -0.0 -0.03" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://container_car_description/meshes/container_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="wheel_1">
+  <inertial>
+    <origin xyz="0.0010701514169682014 0.0 -0.0028596948030623487" rpy="0 0 0"/>
+    <mass value="1.1666454221962672"/>
+    <inertia ixx="0.002257" iyy="0.00088" izz="0.003056" ixy="-0.0" iyz="0.0" ixz="-4e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.0725 -0.0 -0.015" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://container_car_description/meshes/wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.0725 -0.0 -0.015" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://container_car_description/meshes/wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_wheel_1">
+  <inertial>
+    <origin xyz="5.551115123125783e-17 0.007499999999999986 -3.469446951953614e-18" rpy="0 0 0"/>
+    <mass value="0.08323257036604456"/>
+    <inertia ixx="6e-06" iyy="9e-06" izz="6e-06" ixy="-0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.175 -0.05 -0.015" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://container_car_description/meshes/left_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.175 -0.05 -0.015" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://container_car_description/meshes/left_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_wheel_1">
+  <inertial>
+    <origin xyz="5.551115123125783e-17 -0.007500000000000007 5.204170427930421e-18" rpy="0 0 0"/>
+    <mass value="0.08323257036604456"/>
+    <inertia ixx="6e-06" iyy="9e-06" izz="6e-06" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.175 0.05 -0.015" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://container_car_description/meshes/right_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.175 0.05 -0.015" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://container_car_description/meshes/right_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="Rigid 12" type="fixed">
+  <origin xyz="-0.02 0.0 0.03" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="container_1"/>
+</joint>
+
+<joint name="Rigid 13" type="fixed">
+  <origin xyz="-0.0725 0.0 0.015" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="wheel_1"/>
+</joint>
+
+<joint name="Revolute 14" type="continuous">
+  <origin xyz="0.175 0.05 0.015" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="left_wheel_1"/>
+  <axis xyz="0.0 1.0 0.0"/>
+</joint>
+
+<joint name="Revolute 15" type="continuous">
+  <origin xyz="0.175 -0.05 0.015" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="right_wheel_1"/>
+  <axis xyz="0.0 1.0 0.0"/>
+</joint>
+
+</robot>
